@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ShapeService } from '../services/shape.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,11 +9,13 @@ import { Component } from '@angular/core';
 })
 export class ToolbarComponent {
 
-  drawRectangleOnClick(){
+  constructor(private shapeService: ShapeService) {}
 
+  drawRectangleOnClick() {
+    this.shapeService.triggerShape('rectangle');
   }
 
-  drawStarOnClick(){
-    
+  drawStarOnClick() {
+    this.shapeService.triggerShape('star');
   }
 }
