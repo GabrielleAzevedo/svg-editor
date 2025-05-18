@@ -4,28 +4,23 @@ import { ShapeService } from '../services/shape.service';
 
 @Component({
   selector: 'app-canvas',
-  imports: [],
   templateUrl: './canvas.component.html',
-  styleUrl: './canvas.component.scss'
+  styleUrls: ['./canvas.component.scss']
 })
 export class CanvasComponent implements OnInit, OnDestroy {
-  @ViewChild('canvas', { static: true })
-  canvasRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvasSvg', { static: true })
+  canvasRef!: ElementRef<SVGSVGElement>;
 
-  private ctx: CanvasRenderingContext2D | null = null;
   private sub!: Subscription;
 
   constructor(private shapeService: ShapeService) {}
 
   ngOnInit(): void {
     this.sub = this.shapeService.shapeCommand$.subscribe((command) => {
-      const ctx = this.prepareContext();
-      if (!ctx) return;
-
       if (command === 'rectangle') {
-        this.drawRectangle(ctx);
+        this.drawRectangle();
       } else if (command === 'star') {
-        this.drawStar(ctx);
+        this.drawStar();
       }
     });
   }
@@ -34,46 +29,51 @@ export class CanvasComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  private prepareContext(): CanvasRenderingContext2D | null {
-    const canvas = this.canvasRef.nativeElement;
-    const context = canvas.getContext('2d');
-    if (!context) return null;
-
-    const dpr = window.devicePixelRatio || 1;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    context.scale(dpr, dpr);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    this.ctx = context;
-    return context;
+  private clearSvg() {
+    const svg = this.canvasRef.nativeElement;
+    while (svg.firstChild) {
+      svg.removeChild(svg.firstChild);
+    }
   }
 
-  private drawRectangle(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = 'pink';
-    ctx.fillRect(10, 10, 200, 100);
+  private drawRectangle() {
+    this.clearSvg();
+
+    const svg = this.canvasRef.nativeElement;
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+
+    rect.setAttribute('x', '10');
+    rect.setAttribute('y', '10');
+    rect.setAttribute('width', '200');
+    rect.setAttribute('height', '100');
+    rect.setAttribute('fill', 'pink');
+
+    svg.appendChild(rect);
   }
 
-  private drawStar(ctx: CanvasRenderingContext2D) {
-    const canvas = this.canvasRef.nativeElement;
-    const centerX = canvas.clientWidth / 2;
-    const centerY = canvas.clientHeight / 2;
+  private drawStar() {
+    this.clearSvg();
+
+    const svg = this.canvasRef.nativeElement;
+    const star = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+
+    const centerX = svg.clientWidth / 2;
+    const centerY = svg.clientHeight / 2;
     const radius = 100;
     const points = 5;
 
-    ctx.beginPath();
+    let path = '';
     for (let i = 0; i < points * 2; i++) {
       const angle = (Math.PI / points) * i;
       const r = i % 2 === 0 ? radius : radius / 2;
-      const px = centerX + r * Math.sin(angle);
-      const py = centerY - r * Math.cos(angle);
-      i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      const x = centerX + r * Math.sin(angle);
+      const y = centerY - r * Math.cos(angle);
+      path += `${x},${y} `;
     }
-    ctx.closePath();
-    ctx.fillStyle = 'yellow';
-    ctx.fill();
+
+    star.setAttribute('points', path.trim());
+    star.setAttribute('fill', 'yellow');
+
+    svg.appendChild(star);
   }
 }
