@@ -29,15 +29,9 @@ export class CanvasComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  private clearSvg() {
-    const svg = this.canvasRef.nativeElement;
-    while (svg.firstChild) {
-      svg.removeChild(svg.firstChild);
-    }
-  }
+  
 
   private drawRectangle() {
-    this.clearSvg();
 
     const svg = this.canvasRef.nativeElement;
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -49,10 +43,12 @@ export class CanvasComponent implements OnInit, OnDestroy {
     rect.setAttribute('fill', 'pink');
 
     svg.appendChild(rect);
+    this.shapeService.addShape(rect);
+    console.log(this.shapeService.getShapes());
+
   }
 
   private drawStar() {
-    this.clearSvg();
 
     const svg = this.canvasRef.nativeElement;
     const star = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
@@ -75,5 +71,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
     star.setAttribute('fill', 'yellow');
 
     svg.appendChild(star);
+    this.shapeService.addShape(star);
+    console.log(this.shapeService.getShapes());
   }
 }
