@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-properties-panel',
   imports: [FormsModule, CommonModule],
   templateUrl: './properties-panel.component.html',
-  styleUrl: './properties-panel.component.scss'
+  styleUrl: './properties-panel.component.scss',
 })
 export class PropertiesPanelComponent {
   shape: ShapeData | null = null;
@@ -35,20 +35,31 @@ export class PropertiesPanelComponent {
   }
 
   onInnerRadiusChange(event: Event) {
-  if (!this.shape) return;
+    if (!this.shape) return;
 
-  const input = event.target as HTMLInputElement;
-  let value = Number(input.value);
-  const outerRadius = Number(this.shape.attributes['outerRadius']) || 100;
+    const input = event.target as HTMLInputElement;
+    let value = Number(input.value);
+    const outerRadius = Number(this.shape.attributes['outerRadius']) || 100;
 
-  // Garantir valores válidos
-  if (value < 1) value = 1;
-  if (value > outerRadius) value = outerRadius;
+    // Garantir valores válidos
+    if (value < 1) value = 1;
+    if (value > outerRadius) value = outerRadius;
 
-  this.shape.attributes['innerRadius'] = value.toString();
-  this.shapeService.updateSelectedShape(this.shape);
+    this.shape.attributes['innerRadius'] = value.toString();
+    this.shapeService.updateSelectedShape(this.shape);
+  }
+
+  onFillChange(event: Event) {
+    if (!this.shape) return;
+    const value = (event.target as HTMLInputElement).value;
+    this.shape.attributes['fill'] = value;
+    this.shapeService.updateSelectedShape(this.shape);
+  }
+
+  onStrokeChange(event: Event) {
+    if (!this.shape) return;
+    const value = (event.target as HTMLInputElement).value;
+    this.shape.attributes['stroke'] = value;
+    this.shapeService.updateSelectedShape(this.shape);
+  }
 }
-  
-}
-
-

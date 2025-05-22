@@ -86,6 +86,10 @@ export class CanvasComponent implements OnInit, OnDestroy {
     } else {
       return;
     }
+    el.addEventListener('click', (event) => {
+    event.stopPropagation(); // evita que clique no svg pai também dispare algo
+    this.shapeService.selectShape(shape);
+    });
 
     svg.appendChild(el);
   }
@@ -99,7 +103,8 @@ export class CanvasComponent implements OnInit, OnDestroy {
         width: '200',
         height: '100',
         rx: '0',
-        fill: 'pink',
+        fill: '#ffc0cb',
+        stroke: '#000000'
       },
     };
 
@@ -125,8 +130,8 @@ export class CanvasComponent implements OnInit, OnDestroy {
         outerRadius: String(outerRadius),
         innerRadius: String(innerRadius),
         starPoints: String(starPoints),
-        fill: 'yellow',
-        stroke: 'black',
+        fill: '#ffff00',
+        stroke: '#000000',
       },
     };
 

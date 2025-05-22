@@ -1,22 +1,54 @@
 <div *ngIf="shape">
   <div *ngIf="shape.type === 'rect'">
     <label>Raio da borda:</label>
-    <input type="number"
-           [(ngModel)]="shape.attributes['rx']"
-           (input)="onRxChange($event)" />
+    <input
+      type="number"
+      [(ngModel)]="shape.attributes['rx']"
+      (input)="onRxChange($event)"
+    />
+    <label>Cor de preenchimento:</label>
+    <input
+      type="color"
+      [(ngModel)]="shape.attributes['fill']"
+      (input)="onFillChange($event)"
+    />
+
+    <label>Cor do contorno (stroke):</label>
+    <input
+      type="color"
+      [(ngModel)]="shape.attributes['stroke']"
+      (input)="onStrokeChange($event)"
+    />
   </div>
 
   <div *ngIf="shape.type === 'star'">
     <label>Número de pontas (mínimo 3):</label>
-    <input type="number"
-           [min]="3"
-           [(ngModel)]="shape.attributes['starPoints']"
-           (input)="onStarPointsChange($event)" />
-           <label>Pontudez (Inner Radius):</label>
-  <input type="number"
-         min="1"
-         [max]="shape.attributes['outerRadius']"
-         [(ngModel)]="shape.attributes['innerRadius']"
-         (input)="onInnerRadiusChange($event)" />
+    <input
+      type="number"
+      [min]="3"
+      [(ngModel)]="shape.attributes['starPoints']"
+      (input)="onStarPointsChange($event)"
+    />
+    <label>Pontudez (Inner Radius):</label>
+    <input
+      type="number"
+      min="1"
+      [max]="shape.attributes['outerRadius']"
+      [(ngModel)]="shape.attributes['innerRadius']"
+      (input)="onInnerRadiusChange($event)"
+    />
+    <label>Cor de preenchimento:</label>
+    <input
+      type="color"
+      [(ngModel)]="shape.attributes['fill']"
+      (input)="onFillChange($event)"
+    />
+
+    <label>Cor do contorno (stroke):</label>
+    <input
+      type="color"
+      [(ngModel)]="shape.attributes['stroke']"
+      (input)="onStrokeChange($event)"
+    />
   </div>
 </div>
