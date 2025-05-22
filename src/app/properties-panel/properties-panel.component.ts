@@ -34,6 +34,20 @@ export class PropertiesPanelComponent {
     }
   }
 
+  onInnerRadiusChange(event: Event) {
+  if (!this.shape) return;
+
+  const input = event.target as HTMLInputElement;
+  let value = Number(input.value);
+  const outerRadius = Number(this.shape.attributes['outerRadius']) || 100;
+
+  // Garantir valores válidos
+  if (value < 1) value = 1;
+  if (value > outerRadius) value = outerRadius;
+
+  this.shape.attributes['innerRadius'] = value.toString();
+  this.shapeService.updateSelectedShape(this.shape);
+}
   
 }
 

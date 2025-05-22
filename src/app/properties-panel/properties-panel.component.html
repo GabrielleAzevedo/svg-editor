@@ -12,5 +12,11 @@
            [min]="3"
            [(ngModel)]="shape.attributes['starPoints']"
            (input)="onStarPointsChange($event)" />
+           <label>Pontudez (Inner Radius):</label>
+  <input type="number"
+         min="1"
+         [max]="shape.attributes['outerRadius']"
+         [(ngModel)]="shape.attributes['innerRadius']"
+         (input)="onInnerRadiusChange($event)" />
   </div>
 </div>
