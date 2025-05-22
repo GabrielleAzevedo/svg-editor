@@ -1,59 +1,62 @@
-# SvgEditor
+# Desafio Técnico - Editor SVG Interativo com Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+## 🚀 Sobre o Projeto
 
-## Development server
+Este projeto é uma aplicação web desenvolvida com Angular que simula uma ferramenta de design gráfico simplificada. O usuário pode adicionar e configurar formas SVG (retângulos e estrelas) em um canvas interativo. A aplicação foca em interatividade em tempo real, boa UX e manipulação direta do DOM SVG.
 
-To start a local development server, run:
+## 👨‍💻 Desenvolvido por
 
-```bash
-ng serve
-```
+**Gabrielle Granja Aguiar Azevedo**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠 Funcionalidades Implementadas
 
-## Code scaffolding
+### ✅ Funcionalidades Obrigatórias
+- [x] **Canvas SVG** renderizado com `<svg>` para exibir os elementos.
+- [x] **Adição de elementos:**
+  - [x] Botão "Adicionar Retângulo".
+  - [x] Botão "Adicionar Estrela".
+- [x] **Renderização de elementos** SVG diretamente no canvas.
+- [x] **Configuração de Retângulo:**
+  - [x] Arredondamento dos cantos (`rx`) via input com atualização em tempo real.
+- [x] **Configuração de Estrela:**
+  - [x] Número de pontas.
+  - [x] Comprimento/profundidade das pontas (diferença entre raio interno e externo).
+  - [x] Alterações aplicadas visualmente em tempo real.
+- [x] Estrutura modular com SPA utilizando Angular 16+.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 🌟 Funcionalidades Opcionais Implementadas
+- [x] **Painel de Propriedades:**
+  - [x] Aparece ao selecionar um elemento.
+  - [x] Atualização de propriedades em tempo real.
+- [x] **Seleção de elementos no canvas com clique.**
+- [x] **Configurações visuais adicionais:**
+  - [x] Cor de preenchimento (fill).
+  - [x] Cor da borda (stroke).
 
-```bash
-ng generate component component-name
-```
+## 🧠 Decisões de Arquitetura
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Utilização de **Serviços com Subjects/Observables** para controle de estado e comunicação entre componentes.
+- **Componentização clara**: canvas, controles de adição, painel de propriedades.
+- **Manipulação direta do DOM SVG**, como solicitado, sem uso de bibliotecas externas como D3.js.
+- Cálculo dos pontos da estrela com **funções trigonométricas**, controlando número de pontas e profundidade via sliders.
 
-```bash
-ng generate --help
-```
+## 🖼 Exemplo da Interface
 
-## Building
+![image](https://github.com/user-attachments/assets/dedc8ae9-4395-46cd-a8b7-85822943a4b0)
 
-To build the project run:
 
-```bash
-ng build
-```
+## 🧪 Como rodar o projeto localmente
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+1. Clone o repositório
+2. ## Como executar?
 
-## Running unit tests
+No diretório do projeto, execute
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### `npm install`
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
+Depois, execute
 
-For end-to-end (e2e) testing, run:
+### `ng serve`
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Abra o seu navegador em [http://localhost:4200](http://localhost:4200) para visualizar o projeto rodando.
