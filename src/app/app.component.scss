@@ -1,4 +1,4 @@
-$toolbar-height: 7vh;
+$toolbar-height: 10vh;
 
 :host {
   height: 100vh;
@@ -37,7 +37,7 @@ app-toolbar {
     top: 50%;
     transform: translateY(-50%);
     right: 20px;
-    background: #d5b3da;
+    background: #f0f0f0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 2;
     padding: 16px;
@@ -45,7 +45,6 @@ app-toolbar {
     height: 60vh;
     border: 2px solid purple;
     border-radius: 5px;
-    display: none;
   }
 }
 

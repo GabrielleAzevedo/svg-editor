@@ -4,6 +4,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { CanvasComponent } from "./canvas/canvas.component";
 import { PropertiesPanelComponent } from "./properties-panel/properties-panel.component";
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, ToolbarComponent, CanvasComponent, PropertiesPanelComponent],

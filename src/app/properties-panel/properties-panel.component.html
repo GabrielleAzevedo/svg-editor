@@ -1,1 +1,16 @@
-<p>properties-panel works!</p>
+<div *ngIf="shape">
+  <div *ngIf="shape.type === 'rect'">
+    <label>Raio da borda:</label>
+    <input type="number"
+           [(ngModel)]="shape.attributes['rx']"
+           (input)="onRxChange($event)" />
+  </div>
+
+  <div *ngIf="shape.type === 'star'">
+    <label>Número de pontas (mínimo 3):</label>
+    <input type="number"
+           [min]="3"
+           [(ngModel)]="shape.attributes['starPoints']"
+           (input)="onStarPointsChange($event)" />
+  </div>
+</div>
